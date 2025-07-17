@@ -109,9 +109,7 @@ class _FirstPageState extends State<FirstPage> {
           320,
           50,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16)
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
       onPressed: () {
         String input = palindromeController.text;
@@ -150,6 +148,16 @@ class _FirstPageState extends State<FirstPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
       onPressed: () {
+        if (nameController.text.trim().isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'Nama harus diisi',
+              ),
+            ),
+          );
+          return;
+        }
         Provider.of<UserProvider>(context, listen: false)
             .setName(nameController.text);
         Navigator.push(
