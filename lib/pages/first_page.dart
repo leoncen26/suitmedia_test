@@ -39,7 +39,7 @@ class _FirstPageState extends State<FirstPage> {
               height: 116,
               width: 116,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             widgetName(),
             const SizedBox(height: 30),
             palindromeText(),
@@ -67,7 +67,7 @@ class _FirstPageState extends State<FirstPage> {
           filled: true,
           fillColor: Colors.white.withOpacity(0.9),
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(25.0)),
             borderSide: BorderSide.none,
@@ -91,7 +91,7 @@ class _FirstPageState extends State<FirstPage> {
           filled: true,
           fillColor: Colors.white.withOpacity(0.9),
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(25.0)),
             borderSide: BorderSide.none,
@@ -104,11 +104,15 @@ class _FirstPageState extends State<FirstPage> {
   Widget buttonCheck() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff2B637B),
-          minimumSize: const Size(
-            320,
-            50,
-          )),
+        backgroundColor: const Color(0xff2B637B),
+        minimumSize: const Size(
+          320,
+          50,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16)
+        ),
+      ),
       onPressed: () {
         String input = palindromeController.text;
         bool result = isPalindrome(input);
@@ -138,11 +142,13 @@ class _FirstPageState extends State<FirstPage> {
   Widget buttonNextPage() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff2B637B),
-          minimumSize: const Size(
-            320,
-            50,
-          )),
+        backgroundColor: const Color(0xff2B637B),
+        minimumSize: const Size(
+          320,
+          50,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
       onPressed: () {
         Provider.of<UserProvider>(context, listen: false)
             .setName(nameController.text);

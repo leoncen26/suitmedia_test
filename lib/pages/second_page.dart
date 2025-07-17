@@ -5,7 +5,6 @@ import 'package:suitmedia_test/provider/user_provider.dart';
 
 // ignore: must_be_immutable
 class SecondPage extends StatefulWidget {
-
   const SecondPage({super.key});
 
   @override
@@ -25,7 +24,10 @@ class _SecondPageState extends State<SecondPage> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios, color: Color(0xff554AF0),)),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Color(0xff554AF0),
+            )),
         title: const Text('Seccond Screen'),
         centerTitle: true,
       ),
@@ -71,17 +73,24 @@ class _SecondPageState extends State<SecondPage> {
   Widget buttonChooseUser() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xff2B637B),
-            minimumSize: const Size(
-              310,
-              40,
-            )),
-        onPressed: () async{
-          final userName = await Navigator.push(context, MaterialPageRoute(builder: (context){
-            return const ThirdPage();
-
-          }));
-          if(userName != null){
+          backgroundColor: const Color(0xff2B637B),
+          minimumSize: const Size(
+            320,
+            50,
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
+        onPressed: () async {
+          final userName = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const ThirdPage();
+              },
+            ),
+          );
+          if (userName != null) {
             setState(() {
               selectedUser = userName;
             });
