@@ -17,17 +17,18 @@ class _ThirdPageState extends State<ThirdPage> {
   int currentPage = 1;
   bool isLoading = false;
   bool hasMore = true;
+  final int perPage = 6;
 
   Future<void> fetchInitialData() async {
     setState(() {
       isLoading = true;
     });
     try {
-      final data = await fetchUser(1);
+      final data = await fetchUser(1, perPage);
       setState(() {
         users = data;
         currentPage = 1;
-        hasMore = data.length == 10;
+        hasMore = data.length == perPage;
       });
     } catch (_) {}
     setState(() {
@@ -36,15 +37,17 @@ class _ThirdPageState extends State<ThirdPage> {
   }
 
   Future<void> fetchMoreData() async {
+    if (isLoading || !hasMore) return;
     setState(() {
       isLoading = true;
     });
     try {
-      final data = await fetchUser(currentPage + 1);
+      final nextPage = currentPage + 1;
+      final data = await fetchUser(nextPage, perPage);
       setState(() {
         users.addAll(data);
-        currentPage++;
-        hasMore = data.length == 10;
+        currentPage = nextPage;
+        hasMore = data.length == perPage;
       });
     } catch (_) {}
     setState(() {
@@ -62,7 +65,7 @@ class _ThirdPageState extends State<ThirdPage> {
     fetchInitialData();
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
-              scrollController.position.minScrollExtent - 200 &&
+              scrollController.position.maxScrollExtent - 100 &&
           !isLoading &&
           hasMore) {
         fetchMoreData();
@@ -85,6 +88,7 @@ class _ThirdPageState extends State<ThirdPage> {
         ),
         title: const Text('Third Screen'),
         centerTitle: true,
+        elevation: 0,
         bottom: PreferredSize(preferredSize: const Size.fromHeight(1.0), child: Container(
           color: Colors.grey,
           height: 1,
@@ -93,10 +97,10 @@ class _ThirdPageState extends State<ThirdPage> {
       body: RefreshIndicator(
         onRefresh: refreshUsers,
         child: users.isEmpty && !isLoading
-            ? const Center(child: Text('Tidak ada data'))
+            ? const Center(child: Text('No Data Available'))
             : ListView.builder(
                 controller: scrollController,
-                itemCount: users.length,
+                itemCount: hasMore ? users.length + 1 : users.length,
                 itemBuilder: (BuildContext context, int index) {
                   if (index == users.length) {
                     return const Padding(
@@ -113,10 +117,10 @@ class _ThirdPageState extends State<ThirdPage> {
                       children: [
                         ListTile(
                           leading: CircleAvatar(backgroundImage: NetworkImage(user.avatar),),
-                          title: Text(user.firstName + user.lastName),
+                          title: Text('${user.firstName} ${user.lastName}'),
                           subtitle: Text(user.email),
                           onTap: (){
-                            Provider.of<UserProvider>(context, listen: false).setSelectedName(user.firstName + user.lastName);
+                            Provider.of<UserProvider>(context, listen: false).setSelectedName('${user.firstName} ${user.lastName}');
                             Navigator.pop(context);
                           },
                         ),
