@@ -1,16 +1,7 @@
 # suitmedia_test
 
-A new Flutter project.
+Projek ini adalah projek untuk test suitmedia untuk mobile developer intern. Projek ini dibuat dengan menggunakan Flutter Dart. Projek ini terdapat beberapa fitur seperti
+- Palindrome Check
+- Integrasi API
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Pada projek ini juga menggunakan Provider sebagai state management memungkinkan data digunakan secara global dengan lebih efektif. 
