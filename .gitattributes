@@ -1,0 +1,12 @@
+# Fokuskan deteksi ke Dart
+*.dart linguist-language=Dart
+lib/** linguist-detectable=true
+
+# Abaikan kode native
+android/** linguist-detectable=false
+ios/** linguist-detectable=false
+macos/** linguist-detectable=false
+windows/** linguist-detectable=false
+linux/** linguist-detectable=false
+*.cpp linguist-detectable=false
+*.h linguist-detectable=false
